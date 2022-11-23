@@ -4,8 +4,11 @@
     "license" : "MIT",
     "autoload": {
         "psr-4": {
-            "Ofegat\\": "/src/app"
-        }
+            "Jocs\\": "src/app/"
+        },
+        "files": [
+            "src/helpers/myHelpers.php"
+        ]
     },
     "authors": [
         {
