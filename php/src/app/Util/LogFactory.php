@@ -1,7 +1,7 @@
 <?php
 
 // TODO Posa el namespace
-
+require 'vendor/autoload.php';
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Psr\Log\LoggerInterface;
