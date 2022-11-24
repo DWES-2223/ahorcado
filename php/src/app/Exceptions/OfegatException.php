@@ -1,6 +1,6 @@
 <?php
 
-namespace Jocs\Exceptions;
+// TODO Posa el namespace
 
 class OfegatException extends \Exception
 {

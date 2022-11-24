@@ -21,7 +21,7 @@ class OfegatTest extends \Codeception\Test\Unit
         $of = new Ofegat('Independencia');
         $this->assertEquals('independencia', $of->getParaula());
         $this->assertEquals([], $of->getLletres());
-        $this->assertEquals(7, $of::getMaxErrades());
+        $this->assertEquals(7, $of->getMaxErrades());
    }
 
    public function testExceptionsNovaLletra()
@@ -113,8 +113,8 @@ class OfegatTest extends \Codeception\Test\Unit
     public function testUpdateMAX()
     {
         $of = new Ofegat('Independencia');
-        $of::setNivell(4);
-        $this->assertEquals(5, $of::getMaxErrades());
+        $of->setNivell(4);
+        $this->assertEquals(5, $of->getMaxErrades());
         $of->novaLletra('x');
         $this->assertEquals(false, $of->fiJoc());
         $of->novaLletra('z');

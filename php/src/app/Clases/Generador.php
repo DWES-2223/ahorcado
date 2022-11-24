@@ -1,6 +1,6 @@
 <?php
 
-namespace Jocs\Clases;
+// TODO Posa el namespace
 
 use Goutte\Client;
 use Symfony\Component\HttpClient\HttpClient;
@@ -17,11 +17,12 @@ class Generador
     public function trauParaula()
     {
         // TODO aleatoriament del array de paraules (0,5p)
+        return $this->paraules[0];
     }
 
     private function scrapping()
     {
-        // TODO el return està perque no falle. Substituir (1p)
+        // TODO
         return ['hola'];
     }
 

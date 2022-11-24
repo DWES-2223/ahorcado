@@ -1,6 +1,6 @@
 <?php
 
-namespace Jocs\Util;
+// TODO Posa el namespace
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;

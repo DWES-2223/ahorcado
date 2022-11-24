@@ -1,5 +1,6 @@
 <?php
-namespace Jocs\Clases;
+
+// TODO Posa el namespace
 
 use Jocs\Exceptions\OfegatException;
 
@@ -22,7 +23,7 @@ class Ofegat
     /**
      * @var int
      */
-    protected static $maxErrades = 7;
+    protected int $maxErrades = 7;
 
     /**
      * @param String $paraula
@@ -61,9 +62,9 @@ class Ofegat
     /**
      * @return int
      */
-    public static function getMaxErrades(): int
+    public function getMaxErrades(): int
     {
-        return self::$maxErrades;
+        return $this->maxErrades;
     }
 
     /**
@@ -88,6 +89,7 @@ class Ofegat
     public function novaLletra($lletra):void
     {
         //TODO (1p)
+        $this->lletra[] = $lletra;
     }
 
     /**
@@ -96,6 +98,7 @@ class Ofegat
     public function fiJoc():mixed
     {
         //TODO Mira si ha acabat el joc (0,75p)
+        return false;
     }
 
     private function totesDescobertes() {
@@ -111,8 +114,8 @@ class Ofegat
     /**
      * @param int $maxErrades
      */
-    public static function setNivell(int $level): void
+    public function setNivell(int $level): void
     {
-        //TODO Canvia $maxErrades depenent del nivell passat (0,5p)
+        //TODO Canvia $maxErrades depenent del nivell passat (0,25p)
     }
 }
