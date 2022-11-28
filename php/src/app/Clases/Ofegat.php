@@ -1,9 +1,8 @@
 <?php
 
 // TODO Posa el namespace
-
+namespace  Jocs\Clases;
 use Jocs\Exceptions\OfegatException;
-
 
 /**
  *
@@ -89,7 +88,17 @@ class Ofegat
     public function novaLletra($lletra):void
     {
         //TODO (1p)
-        $this->lletra[] = $lletra;
+        //$this->lletra[] = $lletra;
+        if(strlen($lletra) > 1 || is_numeric($lletra)){
+            throw new OfegatException();
+        }
+        $letrasPalabra = str_split($this->paraula);
+        if(in_array($lletra, $this->lletres) || !in_array($lletra, $letrasPalabra)){
+            $this->errades++;
+        }
+        if(!in_array($lletra, $this->lletres)){
+            array_push($this->lletres, $lletra);
+        }
     }
 
     /**
@@ -98,6 +107,12 @@ class Ofegat
     public function fiJoc():mixed
     {
         //TODO Mira si ha acabat el joc (0,75p)
+        if ($this->errades >= $this->maxErrades){
+            return 0;
+        }
+        if ($this->totesDescobertes()){
+            return 1;
+        }
         return false;
     }
 
@@ -117,5 +132,11 @@ class Ofegat
     public function setNivell(int $level): void
     {
         //TODO Canvia $maxErrades depenent del nivell passat (0,25p)
+        if ($level <0 || $level > 4){
+            throw \OfegatException::class();
+        }else {
+            $arratMaxIntentos = [10, 8, 7, 6, 5];
+            $this->maxErrades = $arratMaxIntentos[$level];
+        }
     }
 }

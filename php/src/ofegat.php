@@ -2,28 +2,43 @@
 require_once ('../vendor/autoload.php');
 session_start();
 use Jocs\Clases\Ofegat;
-use Jocs\Exceptions\OfegatException;
-use Jocs\Util\LogFactory;
+use Jocs\Clases\Generador;
+use Jocs\Exception\OfegatException;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 if (!isset($_SESSION['nick'])){
     header("Location:inici.php");
 } else {
     $nick = $_SESSION['nick'];
+    $ahorcado = unserialize($_SESSION['partidaActual']);
 }
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // TODO Que faig quan he marcat una lletra (1p)
+    if(isset($_POST['continuar'])){
+        $generador = new Generador();
+        $palabra = $generador->trauParaula();
+        $ahogado = new Ofegat($palabra);
+        //$_SESSION["partidaActual"] = serialize($ahogado);
+    }
+    if(isset($_POST['lletra'])){
+        try {
+            $ahorcado->novaLletra($_POST['lletra']);
+            $_SESSION['partidaActual'] = serialize($ahorcado);
+        }catch (Exception $e){
+                echo "Entrada erronea";
+        }
+    }
+
     // TODO guarda el log (0,5p)
-
+    //$log = new Logger("LogPartida");
+    //$log->pushHandler(new StreamHandler("logs/milog.log", Logger::DEBUG));
+    $palabraSecreta = $ahorcado->getParaula();
+    $numErrores = $ahorcado->getErrades();
+    //$log->info("Nombre: " . $nick . "; Palabra: " . $palabraSecreta . "; Errores: " . $numErrores);
 }
-
-
-
-
-
 ?>
-
 
 <html>
 <head>
@@ -37,8 +52,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php
 include_once ("header.php");
 // TODO Pinta l'estat del joc actual (0,25p)
+echo $ahorcado;
 // TODO FI DEL JOC (1p)
-
+if ($ahorcado->fiJoc() === 0){
+    echo "Se te han acabado los intentos";
+    $perdida = $_SESSION['perdida'];
+    $perdida++;
+    $_SESSION['perdida'] =  $perdida;
+}elseif ($ahorcado->fiJoc() === 1){
+    echo "Enhorabuena has ganado";
+}
 ?>
 <form method="post" action="ofegat.php">
     <div class="form-group row">

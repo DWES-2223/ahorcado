@@ -26,7 +26,14 @@ if (!isset($_SESSION['nick'])){
 include_once ("header.php");
 
 // TODO mostrar puntuacions 0,5P
-
+if (!isset($_SESSION['partidas'])){
+    header("Location:inici.php");
+} else {
+    $partidas = $_SESSION['partidas'];
+    echo "Las partidas realizadas son:" . $_SESSION['partidas']. "<br>";
+    echo "Las partidas Ganadas son:" . $_SESSION['ganada']. "<br>";
+    echo "Las partidas Perdidas son:" . $_SESSION['ganada']. "<br>";
+}
 ?>
 </body>
 </html>

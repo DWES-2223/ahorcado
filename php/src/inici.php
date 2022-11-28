@@ -7,6 +7,17 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // TODO arreplar l'usuari i inicialitzar el joc 1p
+        extract($_POST);
+        $_SESSION["nick"] = $_POST["nick"];
+        $_SESSION["partidas"] = isset($_SESSION['partidas'])?($_SESSION['partidas']):0;
+        $_SESSION["ganada"] = isset($_SESSION['ganada'])?($_SESSION['ganada']):0;
+        $_SESSION["perdida"] = isset($_SESSION['perdida'])?($_SESSION['perdida']):0;
+        $generador = new Generador();
+        $palabra = $generador->trauParaula();
+        $ahogado = new Ofegat($palabra);
+        $ahogado->setNivell($_POST['level']);
+        $_SESSION["partidaActual"] = serialize($ahogado);
+        header("Location:ofegat.php");
     } else {
 
 ?>
